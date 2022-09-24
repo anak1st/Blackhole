@@ -2,15 +2,6 @@ cmake_minimum_required(VERSION 3.20)
 
 project(Blackhole)
 
-set(CMAKE_TOOLCHAIN_FILE "D:/Programs/vcpkg/scripts/buildsystems/vcpkg.cmake"
-        CACHE STRING "Vcpkg toolchain file")
-
-find_package(imgui REQUIRED)
-find_package(glfw3 REQUIRED)
-find_package(GLEW REQUIRED)
-find_package(glm REQUIRED)
-find_package(stb REQUIRED)
-
 file(GLOB SRC_FILES
   "${PROJECT_SOURCE_DIR}/src/*.h"
   "${PROJECT_SOURCE_DIR}/src/*.cpp"
@@ -19,11 +10,18 @@ file(GLOB SRC_FILES
 
 add_executable(${CMAKE_PROJECT_NAME} ${SRC_FILES})
 
+find_package(imgui REQUIRED)
+find_package(glfw3 REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(glm REQUIRED)
+
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE imgui::imgui)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glfw)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE GLEW::GLEW)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glm::glm)
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE stb::stb)
+
+#find_package(stb REQUIRED)
+#target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${STB_INCLUDE_DIRS})
 
 target_compile_features(${CMAKE_PROJECT_NAME} PRIVATE cxx_std_17)
 
